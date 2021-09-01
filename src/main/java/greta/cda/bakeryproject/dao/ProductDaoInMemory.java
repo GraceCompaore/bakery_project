@@ -25,11 +25,7 @@ public class ProductDaoInMemory implements ProductDao{
         return productUnique;
     }
 
-    public List<Product> findBooksContainingName(String name) {
-        return books .stream()
-                .filter(book -> book.getName().toLowerCase().contains(name.toLowerCase()))
-                .collect(Collectors.toList());
-    }
+
 /*
     public List<Product> findProductContainingName(String name) {
         return productList.stream()

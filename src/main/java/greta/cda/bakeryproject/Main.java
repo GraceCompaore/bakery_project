@@ -4,14 +4,24 @@ import greta.cda.bakeryproject.cli.CliController;
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.dao.ProductDaoInMemory;
 import greta.cda.bakeryproject.service.ProductService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
-        ProductDao productDao = new ProductDaoInMemory();
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+        ProductService productService = applicationContext.getBean(ProductService.class);
+        initData(productService);
+
+        CliController cliController = applicationContext.getBean(CliController.class);
+        cliController.start();
+
+       /* ProductDao productDao = new ProductDaoInMemory();
         ProductService productService = new ProductService(productDao);
         CliController cliController = new CliController(productService);
         initData(productService);
-        cliController.start();
+        cliController.start(); */
+
     }
 
     /**
