@@ -5,6 +5,7 @@ import greta.cda.bakeryproject.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +20,11 @@ public class ProductController {
     @GetMapping("/product")
     public List<Product> findAll() {
        return productService.findAll();
+    }
+
+    @GetMapping ("/product/:id")
+    public Product findbyId(@PathParam("id") String id) {
+        return productService.findById(id);
     }
 
     @PostMapping ("/product")

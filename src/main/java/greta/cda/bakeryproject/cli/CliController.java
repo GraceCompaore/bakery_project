@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.UUID;
 
 public class CliController {
     private ProductService productService;
@@ -69,10 +70,13 @@ public class CliController {
             case "3":
                 System.out.println("Entrez l'Id du produit");
                 String productId = scanner.next();
-                productService.findById();
-                System.out.println("Le produit recherché est : ");
-                List<Product> searchProduct = productService.findById();
-                System.out.println(productService.findById());
+                Product searchProduct = productService.findById(productId);
+                if (searchProduct != null) {
+                    System.out.println("Le produit recherché est : " + searchProduct.getName());
+                } else {
+                    System.out.println("aucun produit n'a été trouvé");
+                }
+
                 break;
                 /*
             case "4" :

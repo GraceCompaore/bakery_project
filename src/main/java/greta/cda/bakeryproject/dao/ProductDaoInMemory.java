@@ -5,13 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
 public class ProductDaoInMemory implements ProductDao{
     private List<Product> productList = new ArrayList<>();
-    private List<Product> productUnique = new ArrayList<>();
-
 
     @Override
     public List<Product> findAll() {
@@ -24,8 +23,9 @@ public class ProductDaoInMemory implements ProductDao{
     }
 
     @Override
-    public List<Product> findById() {
-        return productUnique;
+    public Product findById(UUID id) {
+        return productList.stream()
+                .filter(product -> product.getId() == id).findFirst().orElse(null);
     }
 
 

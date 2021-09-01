@@ -24,9 +24,11 @@ public class ProductService {
             Product item = new Product(UUID.randomUUID(), name,quantity, price);
             productDao.add(item);
         }
-        public List<Product> findById(){
 
-            return productDao.findById();
+
+        public Product findById(String id){
+
+            return productDao.findById(UUID.fromString(id));
         }
 
 /*
