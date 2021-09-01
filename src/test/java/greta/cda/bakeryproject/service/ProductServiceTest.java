@@ -2,19 +2,16 @@ package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.domain.Product;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class ProductServiceTest {
@@ -22,7 +19,7 @@ public class ProductServiceTest {
     ProductService productService;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mockedDao = mock(ProductDao.class);
         productService = new ProductService(mockedDao);
@@ -52,8 +49,8 @@ public class ProductServiceTest {
         verify(mockedDao).add(productArgumentCaptor.capture());
 
         Product productSentToDAO = productArgumentCaptor.getValue();
-        assertThat(productSentToDAO.getId(), is(notNullValue()));
-        assertThat(productSentToDAO.getName(), is("Toto"));
+        assertEquals(productSentToDAO.getId(), is(notNullValue()));
+        assertEquals(productSentToDAO.getName(), is("Toto"));
     }
 
 

@@ -1,15 +1,17 @@
 package greta.cda.bakeryproject;
 
 import greta.cda.bakeryproject.cli.CliController;
-import greta.cda.bakeryproject.dao.ProductDao;
-import greta.cda.bakeryproject.dao.ProductDaoInMemory;
-import greta.cda.bakeryproject.service.ProductService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import greta.cda.bakeryproject.service.ProductService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
+
         ProductService productService = applicationContext.getBean(ProductService.class);
         initData(productService);
 
