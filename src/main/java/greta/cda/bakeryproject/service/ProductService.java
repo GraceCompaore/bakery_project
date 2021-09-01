@@ -2,10 +2,12 @@ package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.domain.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ProductService {
         private ProductDao productDao;
 

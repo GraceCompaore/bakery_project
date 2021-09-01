@@ -1,14 +1,17 @@
 package greta.cda.bakeryproject.dao;
 
 import greta.cda.bakeryproject.domain.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class ProductDaoInMemory implements ProductDao{
     private List<Product> productList = new ArrayList<>();
     private List<Product> productUnique = new ArrayList<>();
+
 
     @Override
     public List<Product> findAll() {

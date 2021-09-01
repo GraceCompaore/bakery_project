@@ -3,11 +3,12 @@ package greta.cda.bakeryproject.cli;
 
 import greta.cda.bakeryproject.domain.Product;
 import greta.cda.bakeryproject.service.ProductService;
+import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 import java.util.List;
 
-
+@Controller
 public class CliController {
     private ProductService productService;
 
