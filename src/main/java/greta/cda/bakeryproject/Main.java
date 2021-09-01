@@ -15,8 +15,8 @@ public class Main {
         ProductService productService = applicationContext.getBean(ProductService.class);
         initData(productService);
 
-        CliController cliController = applicationContext.getBean(CliController.class);
-        cliController.start();
+       // CliController cliController = applicationContext.getBean(CliController.class);
+        //cliController.start();
 
        /* ProductDao productDao = new ProductDaoInMemory();
         ProductService productService = new ProductService(productDao);
