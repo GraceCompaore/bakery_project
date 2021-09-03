@@ -1,22 +1,21 @@
 package greta.cda.bakeryproject.domain;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Product {
-    private UUID id;
+    private String id;
     private String name;
     private int quantity;
     private int price;
 
-    public Product(UUID id, String name, int quantity, int price) {
+    public Product(String id, String name, int quantity, int price) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -30,6 +29,10 @@ public class Product {
 
     public int getPrice() {
         return price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

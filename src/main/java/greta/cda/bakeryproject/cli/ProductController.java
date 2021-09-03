@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
     private ProductService productService;
 
@@ -17,22 +18,34 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product")
+    @GetMapping
     public List<Product> findAll() {
-       return productService.findAll();
+        return productService.findAll();
     }
 
-    @GetMapping ("/product/:id")
-    public Product findbyId(@PathParam("id") String id) {
+    @GetMapping("/{id}")
+    public Product findbyId(@PathVariable String id) {
         return productService.findById(id);
     }
 
-    @PostMapping ("/product")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestParam String name, int quantity, int price) {
-        Product item = new Product(UUID.randomUUID(), name,quantity, price);
-        productService.add("toto",1, 2);
+    public void add(@RequestBody Product product) {
+        productService.add(product.getId(),product.getName(), product.getQuantity(), product.getPrice());
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id)
+    {
+        productService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable String id, @RequestBody Product product) {
+        productService.update(id, product);
+    }
+
 }
+
 
 

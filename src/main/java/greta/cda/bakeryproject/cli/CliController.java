@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class CliController {
     private ProductService productService;
-
+    String productId;
     public CliController(ProductService productService) {
 
         this.productService = productService;
@@ -55,13 +55,16 @@ public class CliController {
                 }
                 break;
             case "2":
+                System.out.println("Entrez l'id du produit");
+                productId = scanner.next();
+
                 System.out.println("Entrez le nom du produit");
                 String productName = scanner.next();
                 System.out.println("Entrez la quantité du produit");
                 int productQuantity = scanner.nextInt();
                 System.out.println("Entrez le prix du produit");
                 int productPrice = scanner.nextInt();
-                productService.add(productName, productQuantity, productPrice);
+                productService.add(productId, productName, productQuantity, productPrice);
                 System.out.println("Produit ajouté");
                 System.out.println("la nouvelle liste de produits est :");
                 List<Product> newProductlist = productService.findAll();
@@ -69,7 +72,7 @@ public class CliController {
                 break;
             case "3":
                 System.out.println("Entrez l'Id du produit");
-                String productId = scanner.next();
+                productId = scanner.next();
                 Product searchProduct = productService.findById(productId);
                 if (searchProduct != null) {
                     System.out.println("Le produit recherché est : " + searchProduct.getName());

@@ -15,23 +15,14 @@ public class Main {
         ProductService productService = applicationContext.getBean(ProductService.class);
         initData(productService);
 
-       // CliController cliController = applicationContext.getBean(CliController.class);
-        //cliController.start();
-
-       /* ProductDao productDao = new ProductDaoInMemory();
-        ProductService productService = new ProductService(productDao);
-        CliController cliController = new CliController(productService);
-        initData(productService);
-        cliController.start(); */
-
-    }
+         }
 
     /**
      * Initialise quelques données par défaut afin de ne pas tout perdre à chaque redémarrage
      * @param productService
      */
     private static void initData(ProductService productService) {
-        productService.add("croissant",1, 2);
-        productService.add("pain au chocolat", 2, 3);
+        productService.add("aa1","croissant",1, 2);
+        productService.add("aa2","pain au chocolat", 2, 3);
     }
 }

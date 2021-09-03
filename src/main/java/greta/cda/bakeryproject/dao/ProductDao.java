@@ -8,7 +8,11 @@ import java.util.UUID;
 public interface ProductDao {
     List<Product> findAll();
     void add(Product product);
-    Product findById(UUID id);
+    Product findById(String id);
+    void deleteById(String id);
+    void update (Product product);
+
+
 
     //List<Product> findProductContainingName(String searchedName);
 }

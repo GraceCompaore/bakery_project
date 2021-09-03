@@ -43,7 +43,7 @@ public class ProductServiceTest {
     }*/
     @Test
     public void add() {
-        productService.add("Toto",1,1);
+        productService.add("aa3","Toto",1,1);
 
         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
         verify(mockedDao).add(productArgumentCaptor.capture());
