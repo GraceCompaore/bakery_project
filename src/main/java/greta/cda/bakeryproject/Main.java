@@ -1,7 +1,5 @@
 package greta.cda.bakeryproject;
 
-import greta.cda.bakeryproject.cli.CliController;
-
 import greta.cda.bakeryproject.service.ProductService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +20,7 @@ public class Main {
      * @param productService
      */
     private static void initData(ProductService productService) {
-        productService.add("aa1","croissant",1, 2);
-        productService.add("aa2","pain au chocolat", 2, 3);
+        productService.add(1,"croissant",1, 2);
+        productService.add(2,"pain au chocolat", 2, 3);
     }
 }

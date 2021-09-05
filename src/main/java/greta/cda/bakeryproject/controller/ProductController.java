@@ -1,22 +1,19 @@
-package greta.cda.bakeryproject.cli;
+package greta.cda.bakeryproject.controller;
 
-import greta.cda.bakeryproject.domain.Product;
+import greta.cda.bakeryproject.entity.Product;
 import greta.cda.bakeryproject.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
-    private ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private final ProductService productService;
 
     @GetMapping
     public List<Product> findAll() {
@@ -24,24 +21,23 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product findbyId(@PathVariable String id) {
+    public Product findById(@PathVariable int id) {
         return productService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody Product product) {
-        productService.add(product.getId(),product.getName(), product.getQuantity(), product.getPrice());
+        productService.add(product.getId(), product.getName(), product.getQuantity(), product.getPrice());
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id)
-    {
+    public void delete(@PathVariable int id) {
         productService.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable String id, @RequestBody Product product) {
+    public void update(@PathVariable int id, @RequestBody Product product) {
         productService.update(id, product);
     }
 

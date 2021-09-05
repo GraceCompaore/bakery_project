@@ -1,14 +1,13 @@
 package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.ProductDao;
-import greta.cda.bakeryproject.domain.Product;
+import greta.cda.bakeryproject.entity.Product;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +42,7 @@ public class ProductServiceTest {
     }*/
     @Test
     public void add() {
-        productService.add("aa3","Toto",1,1);
+        productService.add(3,"Toto",1,1);
 
         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
         verify(mockedDao).add(productArgumentCaptor.capture());
