@@ -1,27 +1,35 @@
 package greta.cda.bakeryproject.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Product {
+public class Person implements Serializable {
     @Id
-    @GeneratedValue
+    @Column(length = 36)
+
     private int id;
-    private String name;
-    private int quantity;
-    private int price;
+
+    private String login;
+
+    private String password;
+
+    private String role;
 
 
 }
-

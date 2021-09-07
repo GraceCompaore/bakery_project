@@ -1,5 +1,6 @@
-package greta.cda.bakeryproject.dao;
+package greta.cda.bakeryproject.dao.impl;
 
+import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -41,5 +42,10 @@ public class ProductDaoInMemory implements ProductDao {
             }
         }
         productList.set(index, product);
+    }
+
+    @Override
+    public List<Product> findProductContainingName(String Name) {
+        return null;
     }
 }

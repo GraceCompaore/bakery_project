@@ -1,5 +1,6 @@
-package greta.cda.bakeryproject.dao;
+package greta.cda.bakeryproject.dao.impl;
 
+import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.entity.Product;
 import greta.cda.bakeryproject.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,10 @@ public class ProductDaoDb implements ProductDao {
     @Override
     public void update(Product product) {
 
+    }
+
+    @Override
+    public List<Product> findProductContainingName(String name) {
+        return productRepository.findAllByNameContaining(name);
     }
 }

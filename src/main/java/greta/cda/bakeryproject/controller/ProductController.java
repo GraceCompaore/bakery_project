@@ -41,6 +41,11 @@ public class ProductController {
         productService.update(id, product);
     }
 
+    @GetMapping("/name/{queryName}")
+    public List<Product> findByName(@PathVariable String queryName) {
+        return productService.findProductContainingName(queryName);
+    }
+
 }
 
 

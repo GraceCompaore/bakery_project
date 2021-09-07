@@ -2,17 +2,16 @@ package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.entity.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
     private final ProductDao productDao;
 
-    public ProductService(ProductDao productDao) {
-        this.productDao = productDao;
-    }
 
     public List<Product> findAll() {
         return productDao.findAll();
@@ -38,6 +37,11 @@ public class ProductService {
             myActualProduct.setName(product.getName());
         }
         productDao.update(myActualProduct);
+    }
+
+    public List<Product> findProductContainingName(String name) {
+        return productDao.findProductContainingName(name);
+
     }
 }
 
