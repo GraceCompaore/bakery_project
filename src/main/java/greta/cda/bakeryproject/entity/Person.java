@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -23,7 +21,7 @@ public class Person implements Serializable {
     @Id
     @Column(length = 36)
 
-    private int id;
+    private UUID id;
 
     private String login;
 
