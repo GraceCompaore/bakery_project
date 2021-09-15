@@ -15,12 +15,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Builder
-public class Product implements Serializable {
+public class ProductOrder implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-    private String name;
-    private int quantity;
-    private int price;
-}
 
+    private String name;
+}

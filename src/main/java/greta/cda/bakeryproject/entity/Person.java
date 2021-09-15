@@ -1,6 +1,5 @@
 package greta.cda.bakeryproject.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ import java.util.UUID;
 public class Person implements Serializable {
     @Id
     @Column(length = 36)
-
+    @org.hibernate.annotations.Type(type="uuid-char")
     private UUID id;
 
     private String login;
@@ -28,6 +27,4 @@ public class Person implements Serializable {
     private String password;
 
     private String role;
-
-
 }
