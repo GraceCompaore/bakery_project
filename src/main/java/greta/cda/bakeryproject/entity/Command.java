@@ -14,18 +14,16 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class Product implements Serializable {
+public class Command implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
 
     private String name;
 
-    private int quantity;
-
-    private int unitPrice;
+    @ManyToOne
+    private Person user;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProductOrder> productOrder;
 }
-

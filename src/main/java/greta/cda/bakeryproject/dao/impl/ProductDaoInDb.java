@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 @Primary
-public class ProductDaoDb implements ProductDao {
+public class ProductDaoInDb implements ProductDao {
     private final ProductRepository productRepository;
 
     @Override
@@ -37,7 +37,7 @@ public class ProductDaoDb implements ProductDao {
 
     @Override
     public void update(Product product) {
-
+        productRepository.save(product);
     }
 
     @Override

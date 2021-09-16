@@ -8,17 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 @RequiredArgsConstructor
-
 public class ProductOrderDaoInDb implements ProductOrderDao {
     private final ProductOrderRepository productOrderRepository;
-
-    @Override
-    public void add(ProductOrder productOrder) {
-        productOrderRepository.save(productOrder);
-    }
 
     @Override
     public List<ProductOrder> findAll() {
@@ -26,9 +19,23 @@ public class ProductOrderDaoInDb implements ProductOrderDao {
     }
 
     @Override
-    public void deleteById(int id) { productOrderRepository.deleteById(id);
-
+    public void add(ProductOrder product) {
+        productOrderRepository.save(product);
     }
 
+    @Override
+    public ProductOrder findById(int id) {
+        return productOrderRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        productOrderRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(ProductOrder product) {
+        productOrderRepository.save(product);
+    }
 
 }

@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,4 +26,7 @@ public class Person implements Serializable {
     private String password;
 
     private String role;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Command> orderList;
 }

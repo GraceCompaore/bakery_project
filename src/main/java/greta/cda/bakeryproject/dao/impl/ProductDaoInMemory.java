@@ -37,7 +37,7 @@ public class ProductDaoInMemory implements ProductDao {
     public void update(Product product) {
         int index = -1;
         for (int i = 0; i < productList.size(); i++) {
-            if (product.getId() == productList.get(i).getId()) {
+            if (product.getId().equals(productList.get(i).getId())) {
                 index = i;
             }
         }

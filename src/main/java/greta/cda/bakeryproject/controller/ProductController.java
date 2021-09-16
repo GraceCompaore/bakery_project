@@ -28,7 +28,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody Product product) {
-        productService.add(product.getId(),product.getName(), product.getQuantity(), product.getPrice());
+        productService.add(product.getId(),product.getName(), product.getQuantity(), product.getUnitPrice());
     }
 
     @DeleteMapping("/{id}")
