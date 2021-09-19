@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -27,16 +28,19 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @RolesAllowed("ADMIN")
     public void add(@RequestBody Product product) {
-        productService.add(product.getId(),product.getName(), product.getQuantity(), product.getUnitPrice());
+        productService.add(product.getName(), product.getQuantity(), product.getUnitPrice());
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public void delete(@PathVariable int id) {
         productService.deleteById(id);
     }
 
     @PutMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public void update(@PathVariable int id, @RequestBody Product product) {
         productService.update(id, product);
     }
@@ -45,7 +49,6 @@ public class ProductController {
     public List<Product> findByName(@PathVariable String queryName) {
         return productService.findProductContainingName(queryName);
     }
-
 }
 
 

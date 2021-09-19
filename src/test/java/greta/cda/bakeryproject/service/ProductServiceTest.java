@@ -42,14 +42,16 @@ public class ProductServiceTest {
     }*/
     @Test
     public void add() {
-        productService.add(3,"Toto",1,1);
+        productService.add("Toto",65,1);
 
         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
         verify(mockedDao).add(productArgumentCaptor.capture());
-
         Product productSentToDAO = productArgumentCaptor.getValue();
+
         assertEquals(productSentToDAO.getId(), is(notNullValue()));
         assertEquals(productSentToDAO.getName(), is("Toto"));
+        assertEquals(productSentToDAO.getQuantity(), is(65));
+        assertEquals(productSentToDAO.getUnitPrice(), is(1));
     }
 
 

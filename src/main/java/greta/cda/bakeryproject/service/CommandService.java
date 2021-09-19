@@ -1,12 +1,14 @@
 package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.CommandDao;
-import greta.cda.bakeryproject.entity.Person;
 import greta.cda.bakeryproject.entity.Command;
+import greta.cda.bakeryproject.entity.Person;
+import greta.cda.bakeryproject.entity.ProductOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,8 +20,8 @@ public class CommandService {
         return commandDao.findAll();
     }
 
-    public void create(Integer id, String name, Person user) {
-        Command myNewCommand = new Command(id, name, user, new ArrayList<>());
+    public void create( Person user, List<ProductOrder> productOrder) {
+        Command myNewCommand = new Command(new Date(), user, productOrder);
         commandDao.add(myNewCommand);
     }
 

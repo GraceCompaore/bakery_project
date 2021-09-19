@@ -19,7 +19,6 @@ public class SignUpController {
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody SignUp signUp) {
         personService.signUp(signUp);
-
     }
 
 }

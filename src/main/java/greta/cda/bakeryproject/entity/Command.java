@@ -1,15 +1,14 @@
 package greta.cda.bakeryproject.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,11 +18,14 @@ public class Command implements Serializable {
     @GeneratedValue
     private Integer id;
 
-    private String name;
+    @NonNull
+    private Date dateCommand;
 
+    @NonNull
     @ManyToOne
     private Person user;
 
+    @NonNull
     @OneToMany(fetch = FetchType.LAZY)
     private List<ProductOrder> productOrder;
 }

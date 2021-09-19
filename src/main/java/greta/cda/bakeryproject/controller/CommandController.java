@@ -6,21 +6,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("/command")
 public class CommandController {
     private final CommandService commandService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @RolesAllowed("CUSTOMER")
     public void create(@RequestBody Command command) {
-        commandService.create(command.getId(), command.getName(), command.getUser());
+        commandService.create(command.getUser(), command.getProductOrder());
     }
 
     @GetMapping
+    @RolesAllowed("ADMIN")
     public List<Command> findAll() {
         return commandService.findAll();
     }

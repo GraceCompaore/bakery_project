@@ -1,15 +1,13 @@
 package greta.cda.bakeryproject.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,13 +17,16 @@ public class Product implements Serializable {
     @GeneratedValue
     private Integer id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     private int quantity;
 
-    private int unitPrice;
+    @NonNull
+    private double unitPrice;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<ProductOrder> productOrder;
+    private List<ProductOrder> productOrderList;
 }
 

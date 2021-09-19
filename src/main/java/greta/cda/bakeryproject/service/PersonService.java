@@ -1,10 +1,9 @@
 package greta.cda.bakeryproject.service;
 
-
+import greta.cda.bakeryproject.dao.IPersonDao;
+import greta.cda.bakeryproject.dto.PersonIdentifierDto;
 import greta.cda.bakeryproject.dto.SignUp;
 import greta.cda.bakeryproject.entity.Person;
-import greta.cda.bakeryproject.repository.PersonRepository;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,20 +14,38 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-
 public class PersonService {
-    private final PersonRepository personRepository;
+    private final IPersonDao personDao;
     private final PasswordEncoder passwordEncoder;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public void signUp(SignUp signUp) {
         Person person = Person.builder()
-                .id (UUID.randomUUID())
+                .id(UUID.randomUUID())
                 .login(signUp.getLogin())
                 .password(passwordEncoder.encode(signUp.getPassword()))
-                .role("USER")
+                .role(signUp.getRole())
                 .build();
-        personRepository.save(person);
+
+        personDao.add(person);
         logger.info("New subscription : login={}", person.getLogin());
+    }
+
+    public void deleteById(Integer id) {
+        personDao.deleteById(id);
+    }
+
+    public void update(int id, PersonIdentifierDto person) {
+        Person personFounded = findById(id);
+
+        if (personFounded != null) {
+            personFounded.setLogin(person.getLogin());
+            personFounded.setPassword(person.getPassword());
+            personDao.update(personFounded);
+        }
+    }
+
+    private Person findById(int id) {
+        return personDao.findById(id);
     }
 }

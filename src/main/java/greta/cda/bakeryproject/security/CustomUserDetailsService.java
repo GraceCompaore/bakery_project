@@ -16,18 +16,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        //1/ chercher notre Person via son login
+        // 1/ chercher notre Person via son login
         Person person = personRepository.findPersonByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException(login));
 
-        //        2/ transforme notre Person en UserDetails
-        UserDetails userDetails = User.builder()
+        // 2/ transforme notre Person en UserDetails
+        return User.builder()
                 .username(person.getLogin())
                 .password(person.getPassword())
-                .roles(person.getRole())
+                .roles(person.getRole().toString())
                 .build();
-
-//        3/ on le retourne
-        return userDetails;
     }
 }

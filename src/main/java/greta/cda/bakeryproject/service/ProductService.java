@@ -2,11 +2,9 @@ package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.entity.Product;
-import greta.cda.bakeryproject.entity.ProductOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,13 +18,13 @@ public class ProductService {
 
     /**
      * Add product in list
-     * @param id
+     *
      * @param name
      * @param quantity
      * @param unitPrice
      */
-    public void add(int id, String name, int quantity, int unitPrice) {
-        Product item = new Product(id, name, quantity, unitPrice, new ArrayList<>());
+    public void add(String name, int quantity, double unitPrice) {
+        Product item = new Product(name, quantity, unitPrice);
         productDao.add(item);
     }
 
@@ -40,10 +38,14 @@ public class ProductService {
 
     public void update(int id, Product product) {
         Product myActualProduct = findById(id);
-        if (product.getName() != null) {
+
+        if (myActualProduct != null) {
             myActualProduct.setName(product.getName());
+            myActualProduct.setQuantity(product.getQuantity());
+            myActualProduct.setUnitPrice(product.getUnitPrice());
+
+            productDao.update(myActualProduct);
         }
-        productDao.update(myActualProduct);
     }
 
     public List<Product> findProductContainingName(String name) {

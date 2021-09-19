@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 @RequiredArgsConstructor
 public class CommandDaoInDb implements CommandDao {
@@ -35,8 +34,8 @@ public class CommandDaoInDb implements CommandDao {
     }
 
     @Override
-    public void deleteById(int id) { commandRepository.deleteById(id);
-
+    public void deleteById(int id) {
+        commandRepository.deleteById(id);
     }
 
 
