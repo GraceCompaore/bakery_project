@@ -1,4 +1,4 @@
-package greta.cda.bakeryproject.configuration;
+package greta.cda.bakeryproject.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -19,7 +19,7 @@ public class ProductOrderService {
         return productOrderDao.findAll();
     }
 
-    public void create(Integer id, int unitPrice, int quantity, Command command, Product product) {
+    public void add (Integer id, int unitPrice, int quantity, Command command, Product product) {
         ProductOrder myNewProductOrder = new ProductOrder(id, unitPrice, quantity, command, product);
         productOrderDao.add(myNewProductOrder);
     }
@@ -32,7 +32,7 @@ public class ProductOrderService {
         productOrderDao.update(productOrder);
     }
 
-    private ProductOrder findById(int id) {
+    public ProductOrder findById(int id) {
         return productOrderDao.findById(id);
     }
 

@@ -4,9 +4,9 @@ import greta.cda.bakeryproject.entity.Command;
 import greta.cda.bakeryproject.service.CommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -17,13 +17,13 @@ public class CommandController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @RolesAllowed("CUSTOMER")
+    @PreAuthorize("hasRole('ROLE_CUSTOM')")
     public void create(@RequestBody Command command) {
         commandService.create(command.getUser(), command.getProductOrder());
     }
 
     @GetMapping
-    @RolesAllowed("ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Command> findAll() {
         return commandService.findAll();
     }

@@ -25,7 +25,6 @@ public class ProductOrder implements Serializable {
     @NonNull
     private int quantity;
 
-    @NonNull
     @ManyToOne
     private Command command;
 
