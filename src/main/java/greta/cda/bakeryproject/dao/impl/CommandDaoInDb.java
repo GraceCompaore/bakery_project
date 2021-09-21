@@ -14,8 +14,8 @@ public class CommandDaoInDb implements CommandDao {
     private final CommandRepository commandRepository;
 
     @Override
-    public void add(Command command) {
-        commandRepository.save(command);
+    public Command add(Command command) {
+        return commandRepository.save(command);
     }
 
     @Override

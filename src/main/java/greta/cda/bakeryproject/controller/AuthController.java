@@ -24,11 +24,7 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
         try {
-            Authentication authenticate = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginDto.getLogin(), loginDto.getPassword()
-                    )
-            );
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getLogin(), loginDto.getPassword()));
 
             return ResponseEntity.ok()
                     .header(

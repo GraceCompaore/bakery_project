@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class PersonDaoInDb implements IPersonDao {
     }
 
     @Override
-    public Person findById(int id) {
+    public Person findById(UUID id) {
         return personRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class PersonDaoInDb implements IPersonDao {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         personRepository.deleteById(id);
     }
 

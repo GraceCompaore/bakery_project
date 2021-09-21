@@ -1,7 +1,7 @@
 package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.IPersonDao;
-import greta.cda.bakeryproject.dto.PersonIdentifierDto;
+import greta.cda.bakeryproject.dto.LoginDto;
 import greta.cda.bakeryproject.dto.SignUp;
 import greta.cda.bakeryproject.entity.Person;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +31,11 @@ public class PersonService {
         logger.info("New subscription : login={}", person.getLogin());
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(UUID id) {
         personDao.deleteById(id);
     }
 
-    public void update(int id, PersonIdentifierDto person) {
+    public void update(UUID id, LoginDto person) {
         Person personFounded = findById(id);
 
         if (personFounded != null) {
@@ -45,7 +45,7 @@ public class PersonService {
         }
     }
 
-    private Person findById(int id) {
+    public Person findById(UUID id) {
         return personDao.findById(id);
     }
 }

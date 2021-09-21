@@ -1,5 +1,6 @@
 package greta.cda.bakeryproject.controller;
 
+import greta.cda.bakeryproject.dto.CreateCommandRequestDto;
 import greta.cda.bakeryproject.entity.Command;
 import greta.cda.bakeryproject.service.CommandService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class CommandController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROLE_CUSTOM')")
-    public void create(@RequestBody Command command) {
-        commandService.create(command.getUser(), command.getProductOrder());
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public void create(@RequestBody CreateCommandRequestDto commandDto) {
+        commandService.create(commandDto);
     }
 
     @GetMapping

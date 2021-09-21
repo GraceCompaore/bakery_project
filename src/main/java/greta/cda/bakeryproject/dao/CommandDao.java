@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommandDao {
 
-    void add(Command command);
+    Command add(Command command);
 
     List<Command> findAll();
 

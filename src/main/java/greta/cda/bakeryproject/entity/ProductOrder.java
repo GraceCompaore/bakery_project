@@ -20,11 +20,12 @@ public class ProductOrder implements Serializable {
     private Integer id;
 
     @NonNull
-    private int unitPrice;
+    private double unitPrice;
 
     @NonNull
     private int quantity;
 
+    @NonNull
     @ManyToOne
     private Command command;
 

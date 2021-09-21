@@ -19,8 +19,10 @@ public class ProductOrderService {
         return productOrderDao.findAll();
     }
 
-    public void add (Integer id, int unitPrice, int quantity, Command command, Product product) {
-        ProductOrder myNewProductOrder = new ProductOrder(id, unitPrice, quantity, command, product);
+    public void add (int unitPrice, int quantity, Command command, Product product) {
+
+        ProductOrder myNewProductOrder = new ProductOrder(unitPrice, quantity, command, product);
+
         productOrderDao.add(myNewProductOrder);
     }
 
