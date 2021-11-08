@@ -3,6 +3,8 @@ package greta.cda.bakeryproject.dao;
 import greta.cda.bakeryproject.entity.Command;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface CommandDao {
 
@@ -10,9 +12,9 @@ public interface CommandDao {
 
     List<Command> findAll();
 
-    Command findById(int id);
+    Optional<Command> findById(UUID id);
 
-    void update(Command command);
+    Command update(Command command);
 
-    void deleteById(int id);
+    void deleteById(UUID id);
 }

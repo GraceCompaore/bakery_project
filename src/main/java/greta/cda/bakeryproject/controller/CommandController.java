@@ -5,6 +5,7 @@ import greta.cda.bakeryproject.entity.Command;
 import greta.cda.bakeryproject.service.CommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,24 +20,24 @@ public class CommandController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public void create(@RequestBody CreateCommandRequestDto commandDto) {
-        commandService.create(commandDto);
+    public ResponseEntity<Command> create(@RequestBody CreateCommandRequestDto commandDto) {
+        return ResponseEntity.ok(commandService.create(commandDto));
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public List<Command> findAll() {
-        return commandService.findAll();
+    public ResponseEntity<List<Command>> findAll() {
+        return ResponseEntity.ok(commandService.findAll());
     }
 
     @DeleteMapping("{/id}")
-    public void deleteById(@PathVariable Integer id) {
+    public void deleteById(@PathVariable String id) {
         commandService.deleteById(id);
     }
 
     @PutMapping("{id}")
-    public void update(int id, @RequestBody Command command) {
-        commandService.update(id, command);
+    public ResponseEntity<Command> update(String id, @RequestBody Command command) {
+        return ResponseEntity.ok(commandService.update(id, command));
     }
 }
 

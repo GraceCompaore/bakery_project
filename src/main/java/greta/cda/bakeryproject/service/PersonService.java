@@ -7,8 +7,11 @@ import greta.cda.bakeryproject.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -19,33 +22,35 @@ public class PersonService {
     private final PasswordEncoder passwordEncoder;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public void signUp(SignUp signUp) {
+    public void signUp(SignUp signUp, String role) {
         Person person = Person.builder()
                 .id(UUID.randomUUID())
                 .login(signUp.getLogin())
                 .password(passwordEncoder.encode(signUp.getPassword()))
-                .role(signUp.getRole())
+                .role(role)
                 .build();
 
         personDao.add(person);
         logger.info("New subscription : login={}", person.getLogin());
     }
 
-    public void deleteById(UUID id) {
-        personDao.deleteById(id);
+    public void deleteById(String id) {
+        personDao.deleteById(UUID.fromString(id));
     }
 
-    public void update(UUID id, LoginDto person) {
-        Person personFounded = findById(id);
+    @Transactional
+    public Person update(String id, LoginDto person) {
+        Person personFounded = personDao.findById(UUID.fromString(id))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Person with id=%s not found", id)));
 
-        if (personFounded != null) {
-            personFounded.setLogin(person.getLogin());
-            personFounded.setPassword(person.getPassword());
-            personDao.update(personFounded);
-        }
+        personFounded.setLogin(person.getLogin());
+        personFounded.setPassword(person.getPassword());
+
+        return personDao.update(personFounded);
     }
 
-    public Person findById(UUID id) {
-        return personDao.findById(id);
+    public Person findById(String id) {
+        return personDao.findById(UUID.fromString(id))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Person with id=%s not found", id)));
     }
 }

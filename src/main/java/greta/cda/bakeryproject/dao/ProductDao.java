@@ -3,17 +3,19 @@ package greta.cda.bakeryproject.dao;
 import greta.cda.bakeryproject.entity.Product;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ProductDao {
     List<Product> findAll();
 
-    void add(Product product);
+    Product add(Product product);
 
-    Product findById(int id);
+    Optional<Product> findById(UUID id);
 
-    void deleteById(int id);
+    void deleteById(UUID id);
 
-    void update(Product product);
+    Product update(Product product);
 
     List<Product> findProductContainingName(String Name);
 }

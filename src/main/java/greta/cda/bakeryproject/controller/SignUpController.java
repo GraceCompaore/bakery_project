@@ -4,6 +4,7 @@ import greta.cda.bakeryproject.dto.SignUp;
 import greta.cda.bakeryproject.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,7 +19,14 @@ public class SignUpController {
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody SignUp signUp) {
-        personService.signUp(signUp);
+        personService.signUp(signUp, "ROLE_CUSTOMER");
+    }
+
+    @PostMapping("/sign-up/admin")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void signUpAdmin(@RequestBody SignUp signUp) {
+        personService.signUp(signUp, "ROLE_ADMIN");
     }
 
 }

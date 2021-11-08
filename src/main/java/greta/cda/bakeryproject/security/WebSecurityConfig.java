@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -21,11 +22,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final CustomUserDetailsService customUserDetailsService;
 
+    private static final String[] PUBLIC_ENDPOINTS = {
+            "/sign-up", "/product", "/auth", "/v3/api-docs/", "/swagger-ui*/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/sign-up", "/auth", "/v3/api-docs/", "/swagger-ui*/**").permitAll()
+                .antMatchers(PUBLIC_ENDPOINTS).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

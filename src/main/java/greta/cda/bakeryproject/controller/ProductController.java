@@ -4,10 +4,10 @@ import greta.cda.bakeryproject.entity.Product;
 import greta.cda.bakeryproject.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -18,37 +18,37 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> findAll() {
-        return productService.findAll();
+    public ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable int id) {
-        return productService.findById(id);
+    public ResponseEntity<Product> findById(@PathVariable String id) {
+        return ResponseEntity.ok(productService.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void add(@RequestBody Product product) {
-        productService.add(product.getName(), product.getQuantity(), product.getUnitPrice());
+    public ResponseEntity<Product> add(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.add(product));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable String id) {
         productService.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public void update(@PathVariable int id, @RequestBody Product product) {
-        productService.update(id, product);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Product> update(@PathVariable String id, @RequestBody Product product) {
+        return ResponseEntity.ok(productService.update(id, product));
     }
 
     @GetMapping("/name/{queryName}")
-    public List<Product> findByName(@PathVariable String queryName) {
-        return productService.findProductContainingName(queryName);
+    public ResponseEntity<List<Product>> findByName(@PathVariable String queryName) {
+        return ResponseEntity.ok(productService.findProductContainingName(queryName));
     }
 }
 

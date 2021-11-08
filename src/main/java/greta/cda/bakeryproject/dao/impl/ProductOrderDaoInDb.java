@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,23 +21,23 @@ public class ProductOrderDaoInDb implements ProductOrderDao {
     }
 
     @Override
-    public void add(ProductOrder product) {
-        productOrderRepository.save(product);
+    public ProductOrder add(ProductOrder product) {
+        return productOrderRepository.save(product);
     }
 
     @Override
-    public ProductOrder findById(int id) {
-        return productOrderRepository.findById(id).orElse(null);
+    public Optional<ProductOrder> findById(UUID id) {
+        return productOrderRepository.findById(id);
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         productOrderRepository.deleteById(id);
     }
 
     @Override
-    public void update(ProductOrder product) {
-        productOrderRepository.save(product);
+    public ProductOrder update(ProductOrder product) {
+        return productOrderRepository.save(product);
     }
 
 }

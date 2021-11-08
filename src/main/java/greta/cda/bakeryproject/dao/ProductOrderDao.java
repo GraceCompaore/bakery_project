@@ -3,16 +3,18 @@ package greta.cda.bakeryproject.dao;
 import greta.cda.bakeryproject.entity.ProductOrder;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ProductOrderDao {
     List<ProductOrder> findAll();
 
-    void add(ProductOrder productOrder);
+    ProductOrder add(ProductOrder productOrder);
 
-    ProductOrder findById(int id);
+    Optional<ProductOrder> findById(UUID id);
 
-    void deleteById(int id);
+    void deleteById(UUID id);
 
-    void update(ProductOrder productOrder);
+    ProductOrder update(ProductOrder productOrder);
 
 }

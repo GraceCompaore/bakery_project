@@ -3,9 +3,13 @@ package greta.cda.bakeryproject.service;
 import greta.cda.bakeryproject.dao.ProductDao;
 import greta.cda.bakeryproject.entity.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -16,41 +20,36 @@ public class ProductService {
         return productDao.findAll();
     }
 
-    /**
-     * Add product in list
-     *
-     * @param name
-     * @param quantity
-     * @param unitPrice
-     */
-    public void add(String name, int quantity, double unitPrice) {
-        Product item = new Product(name, quantity, unitPrice);
-        productDao.add(item);
+    @Transactional
+    public Product add(Product product) {
+        return productDao.add(product);
     }
 
-    public Product findById(int id) {
-        return productDao.findById(id);
+    public Product findById(String id) {
+        return productDao.findById(UUID.fromString(id))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Product with id=%s not found", id)));
     }
 
-    public void deleteById(int id) {
-        productDao.deleteById(id);
+    public void deleteById(String id) {
+        productDao.deleteById(UUID.fromString(id));
     }
 
-    public void update(int id, Product product) {
-        Product myActualProduct = findById(id);
+    @Transactional
+    public Product update(String id, Product product) {
+        Product productToUpdate = productDao.findById(UUID.fromString(id))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Product with id=%s not found", id)));
 
-        if (myActualProduct != null) {
-            myActualProduct.setName(product.getName());
-            myActualProduct.setQuantity(product.getQuantity());
-            myActualProduct.setUnitPrice(product.getUnitPrice());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setQuantity(product.getQuantity());
+        productToUpdate.setName(product.getName());
+        productToUpdate.setCover(product.getCover());
+        productToUpdate.setCategory(product.getCategory());
 
-            productDao.update(myActualProduct);
-        }
+        return productDao.update(productToUpdate);
     }
 
     public List<Product> findProductContainingName(String name) {
         return productDao.findProductContainingName(name);
-
     }
 }
 

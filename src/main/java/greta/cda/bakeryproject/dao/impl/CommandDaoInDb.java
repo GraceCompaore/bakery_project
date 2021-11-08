@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,17 +26,17 @@ public class CommandDaoInDb implements CommandDao {
     }
 
     @Override
-    public Command findById(int id) {
-        return commandRepository.findById(id).orElse(null);
+    public Optional<Command> findById(UUID id) {
+        return commandRepository.findById(id);
     }
 
     @Override
-    public void update(Command command) {
-        commandRepository.save(command);
+    public Command update(Command command) {
+        return commandRepository.save(command);
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         commandRepository.deleteById(id);
     }
 

@@ -1,32 +1,41 @@
 package greta.cda.bakeryproject.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.List;
+import java.util.UUID;
 
 @Entity
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Product implements Serializable {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private UUID id;
 
-    @NonNull
     private String name;
 
-    @NonNull
-    private int quantity;
+    private int quantity; // product stock
 
-    @NonNull
-    private double unitPrice;
+    private double price;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<ProductOrder> productOrderList;
+    private String cover;
+
+    @ManyToOne
+    private Category category;
+
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private List<ProductOrder> productOrderList;
 }
 

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,23 +23,23 @@ public class ProductDaoInDb implements ProductDao {
     }
 
     @Override
-    public void add(Product product) {
-        productRepository.save(product);
+    public Product add(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public Product findById(int id) {
-        return productRepository.findById(id).orElse(null);
+    public Optional<Product> findById(UUID id) {
+        return productRepository.findById(id);
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         productRepository.deleteById(id);
     }
 
     @Override
-    public void update(Product product) {
-        productRepository.save(product);
+    public Product update(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
