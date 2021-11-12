@@ -22,7 +22,7 @@ public class SignUpController {
         personService.signUp(signUp, "ROLE_CUSTOMER");
     }
 
-    @PostMapping("/sign-up/admin")
+    @PostMapping("/admin/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void signUpAdmin(@RequestBody SignUp signUp) {

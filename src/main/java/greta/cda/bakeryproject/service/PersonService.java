@@ -1,8 +1,8 @@
 package greta.cda.bakeryproject.service;
 
 import greta.cda.bakeryproject.dao.IPersonDao;
-import greta.cda.bakeryproject.dto.LoginDto;
 import greta.cda.bakeryproject.dto.SignUp;
+import greta.cda.bakeryproject.dto.UpdatePersonDto;
 import greta.cda.bakeryproject.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,6 +26,7 @@ public class PersonService {
         Person person = Person.builder()
                 .id(UUID.randomUUID())
                 .login(signUp.getLogin())
+                .email(signUp.getEmail())
                 .password(passwordEncoder.encode(signUp.getPassword()))
                 .role(role)
                 .build();
@@ -39,11 +40,12 @@ public class PersonService {
     }
 
     @Transactional
-    public Person update(String id, LoginDto person) {
+    public Person update(String id, UpdatePersonDto person) {
         Person personFounded = personDao.findById(UUID.fromString(id))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Person with id=%s not found", id)));
 
         personFounded.setLogin(person.getLogin());
+        personFounded.setEmail(person.getEmail());
         personFounded.setPassword(person.getPassword());
 
         return personDao.update(personFounded);

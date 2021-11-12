@@ -1,6 +1,6 @@
 package greta.cda.bakeryproject.controller;
 
-import greta.cda.bakeryproject.dto.LoginDto;
+import greta.cda.bakeryproject.dto.UpdatePersonDto;
 import greta.cda.bakeryproject.entity.Person;
 import greta.cda.bakeryproject.service.PersonService;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Person> update(@PathVariable String id, @RequestBody LoginDto person) {
+    public ResponseEntity<Person> update(@PathVariable String id, @RequestBody UpdatePersonDto person) {
         return ResponseEntity.ok(personService.update(id, person));
     }
 }

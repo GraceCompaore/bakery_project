@@ -4,6 +4,7 @@ package greta.cda.bakeryproject.entity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +14,6 @@ import java.util.UUID;
 @Entity
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
 public class Person implements Serializable {
@@ -22,12 +22,14 @@ public class Person implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private UUID id;
 
-    @NonNull
+    @Column(unique = true, nullable = false)
     private String login;
 
-    @NonNull
+    private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    @NonNull
+    @Column(nullable = false)
     private String role;
 }
