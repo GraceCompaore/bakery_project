@@ -12,6 +12,8 @@ public interface CategoryDao {
 
     Optional<Category> findById(UUID id);
 
+    Optional<Category> findByLabel(String label);
+
     Category add(Category category);
 
     void deleteById(UUID id);

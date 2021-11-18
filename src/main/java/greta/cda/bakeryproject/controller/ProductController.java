@@ -1,5 +1,6 @@
 package greta.cda.bakeryproject.controller;
 
+import greta.cda.bakeryproject.dto.CreateProductDto;
 import greta.cda.bakeryproject.entity.Product;
 import greta.cda.bakeryproject.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Product> add(@RequestBody Product product) {
+    public ResponseEntity<Product> add(@RequestBody CreateProductDto product) {
         return ResponseEntity.ok(productService.add(product));
     }
 

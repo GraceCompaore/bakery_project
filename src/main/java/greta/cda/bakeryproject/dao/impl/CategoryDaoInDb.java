@@ -28,6 +28,11 @@ public class CategoryDaoInDb implements CategoryDao {
     }
 
     @Override
+    public Optional<Category> findByLabel(String label) {
+        return categoryRepository.findFirstByLabel(label);
+    }
+
+    @Override
     public Category add(Category category) {
         return categoryRepository.save(category);
     }

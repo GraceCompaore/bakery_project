@@ -1,6 +1,9 @@
 package greta.cda.bakeryproject.service;
 
+import greta.cda.bakeryproject.dao.CategoryDao;
 import greta.cda.bakeryproject.dao.ProductDao;
+import greta.cda.bakeryproject.dto.CreateProductDto;
+import greta.cda.bakeryproject.entity.Category;
 import greta.cda.bakeryproject.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +18,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductDao productDao;
+    private final  CategoryDao categoryDao;
 
     public List<Product> findAll() {
         return productDao.findAll();
     }
 
     @Transactional
-    public Product add(Product product) {
+    public Product add(CreateProductDto productDto) {
+        Category category = categoryDao.findByLabel(productDto.getCategory())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Product category with label=%s not found", productDto.getCategory())));
+
+        Product product = new Product();
+        product.setCategory(category);
+        product.setCover(productDto.getCover());
+        product.setPrice(productDto.getPrice());
+        product.setName(productDto.getName());
+        product.setQuantity(productDto.getQuantity());
+
         return productDao.add(product);
     }
 
