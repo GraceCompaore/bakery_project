@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class CreateCommandRequestDto {
     @NonNull
-    private String userId;
+    private String user;
 
     @NonNull
     private List<CreateProductOrderDto> productOrderList;

@@ -34,10 +34,5 @@ public class CommandController {
     public void deleteById(@PathVariable String id) {
         commandService.deleteById(id);
     }
-
-    @PutMapping("{id}")
-    public ResponseEntity<Command> update(String id, @RequestBody Command command) {
-        return ResponseEntity.ok(commandService.update(id, command));
-    }
 }
 

@@ -26,8 +26,8 @@ public class ProductService {
 
     @Transactional
     public Product add(CreateProductDto productDto) {
-        Category category = categoryDao.findByLabel(productDto.getCategory())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Product category with label=%s not found", productDto.getCategory())));
+        Category category = categoryDao.findById(UUID.fromString(productDto.getCategory()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Product category with id=%s not found", productDto.getCategory())));
 
         Product product = new Product();
         product.setCategory(category);

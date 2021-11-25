@@ -1,11 +1,16 @@
 package greta.cda.bakeryproject.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,10 +22,8 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String label;
-
-    @OneToMany(mappedBy = "category")
-    private List<Product> productList;
 }

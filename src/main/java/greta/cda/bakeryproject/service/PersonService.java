@@ -51,8 +51,8 @@ public class PersonService {
         return personDao.update(personFounded);
     }
 
-    public Person findById(String id) {
-        return personDao.findById(UUID.fromString(id))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Person with id=%s not found", id)));
+    public Person findByLogin(String login) {
+        return personDao.findByLogin(login)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Person with login=%s not found", login)));
     }
 }
